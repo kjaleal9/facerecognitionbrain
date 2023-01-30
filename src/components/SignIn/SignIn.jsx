@@ -25,15 +25,14 @@ class SignIn extends React.Component {
       }),
     })
       .then((response) => response.json())
-      .then((data) => {
-        if (data === "Success") {
-          console.log(data);
+      .then((user) => {
+        if (user.id) {
+          this.props.loadUser(user);
           this.props.onRouteChange("home");
-        } else {
-          console.log(data);
         }
       });
   };
+
   render() {
     const { onRouteChange } = this.props;
     return (
@@ -43,7 +42,7 @@ class SignIn extends React.Component {
             <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
               <legend className="f1 fw6 ph0 mh0">Sign In</legend>
               <div className="mt3">
-                <label className="db fw6 lh-copy f6" for="email-address">
+                <label className="db fw6 lh-copy f6" htmlFor="email-address">
                   Email
                 </label>
                 <input
@@ -55,7 +54,7 @@ class SignIn extends React.Component {
                 />
               </div>
               <div className="mv3">
-                <label className="db fw6 lh-copy f6" for="password">
+                <label className="db fw6 lh-copy f6" htmlFor="password">
                   Password
                 </label>
                 <input
